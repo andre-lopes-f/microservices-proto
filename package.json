@@ -1,0 +1,8 @@
+{
+  "name": "microservices-proto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/UAUBox-Brasil/microservices-proto.git",
+  "author": "Mateus José Pretti Tozoni <mateus.tozoni@uaubox.com.br>",
+  "license": "MIT"
+}

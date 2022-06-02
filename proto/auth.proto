@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package auth;
+
+service AuthService {
+  rpc Authenticate(AuthenticateRequest) returns (AuthenticateResponse) {}
+  rpc CreateUser(CreateUserRequest) returns (AuthenticateResponse) {}
+  rpc GetUser(AuthenticateRequest) returns (AuthenticateResponse) {}
+  rpc VerifyToken(AuthenticateRequest) returns (VerifyTokenResponse) {}
+}
+
+message AuthenticateRequest {
+  string token = 1;
+}
+
+message AuthenticateResponse {
+  string id = 1;
+  string uid = 2;
+  string name = 3;
+  string email = 4;
+  string telephone = 5;
+  string document = 6;
+  string documentType = 7;
+  string createdAt = 8;
+  string updatedAt = 9;
+}
+
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string telephone = 3;
+  string document = 4;
+  string documentType = 5 [default = "CPF"]; 
+  string token = 6;
+}
+
+message VerifyTokenResponse {
+  int32 code = 1;
+  string status = 2;
+  string message = 3;
+}
+
+message HealthCheckRequest {
+  string service = 1;
+}
+
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+    SERVICE_UNKNOWN = 3;  // Used only by the Watch method.
+  }
+  ServingStatus status = 1;
+}
+
+service Health {
+  rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
+}
